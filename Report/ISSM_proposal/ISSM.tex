@@ -1,0 +1,366 @@
+\documentclass[12pt]{article}
+\RequirePackage{style}
+\usepackage{setspace}
+\setstretch{1.25}
+
+\usepackage[title]{appendix}
+\usepackage{amsfonts} %% mathbb
+\usepackage{dsfont}
+\pagenumbering{arabic}
+
+
+\usepackage[backend=biber,style=apa,defernumbers]{biblatex}
+
+\addbibresource{reference.bib}
+
+\DeclareBibliographyCategory{dataset}
+
+\addtocategory{dataset}{CLA2015,MOL2017,MOL2019,MOL2021a,MOL2021b,MOL2024}
+
+
+
+
+\usepackage[dvipsnames]{xcolor}
+
+\hypersetup{
+    colorlinks,
+    linkcolor= RoyalPurple,
+    citecolor= RoyalPurple,
+    urlcolor= RoyalPurple
+}
+\usepackage{listings}
+\lstset{
+  language=R,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  showstringspaces=false,
+  breaklines=true
+}
+
+\title{\Large\textbf{Understanding the Effect of Shorter Compulsory Military Service: Evidence From Taiwan
+\footnote{This proposal was presented at Institute for Social Science Methodology (ISSM), Academia Sinica, on July 25, 2025. The presentation focused on wage earnings rather than family formation. We are honored to receive the Professor Jih-wen Lin Scholarship, and we hope this study can be accomplished in the future.}
+}}
+\author{Hsueh-Tse Cheng\thanks{Department of Economics, National Taiwan University} \\ \and Yin-Yun Li\thanks{Department of Economics, National Taiwan University}}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% \begin{abstract}
+% A 2013 policy reform in Taiwan reduced the mandatory military service length from one year to four months, applying exclusively to the cohort born in or after 1994. This study investigates the causal consequences of shortening compulsory service on the socioeconomic outcomes of young men in Taiwan. We created a sharp discontinuity in service duration based on birth-month. Using a regression discontinuity (RD) framework centered on this cutoff, we analyze the policy's impact on labor market integration—measured by labor force participation, wage earnings at a specific age, and the time to find a first job—and on family formation, specifically the age at first marriage. This research aims to provide causal evidence on how the policy reform shapes human capital accumulation and lifetime decision.
+% \medskip
+
+% \noindent \textbf{Keywords:} Compulsory military service reduction; regression discontinuity design (RDD); human capital; family formation
+% \end{abstract}
+
+\section{Introduction}
+
+In 2013, the Taiwanese government shortened the length of compulsory military service (CMS) from one year to four months for male citizens born in or after 1994. This reform raises an interesting question: suppose two otherwise identical individuals differ only in their birth year. Since the individual born after 1994 benefits from shorter military service, he might enter the labor market earlier and accumulate more work experience, potentially leading to higher wage earnings at the given age compared with the one born before 1994.
+
+Some support this story and argue that military service disrupts human capital investment. However, few studies have examined this causality in the Taiwanese context. It also remains uncertain whether military service equips individuals with occupation-specific skills that yield labor market benefits. In this paper, we first exploit the policy variation as a quasi-experiment, using birth year 1994 as a sharp cutoff for a regression discontinuity design. We also discuss the limitations of the survey data from external sources and emphasize the importance of high-quality administrative data in this study.
+
+To further capture the dynamic patterns of wage profiles and conduct counterfactual analyses in response to the CMS reforms implemented in other years, we develop an intertemporal structural model to analyze male agents' decision processes regarding education, military service, and labor supply. The results will be presented in the future.
+
+\section{Literature Review}
+
+An extensive body of literature has studied the consequences of military service on future income. \textcite{angrist1990lifetime} utilized the Vietnam draft lottery in the early 1970s to estimate the negative effect of veteran status on later earnings using the instrumental variable to avoid selection bias.
+
+Later, \textcite{angrist1994world} shows that World War II veterans earn no more than their nonveteran counterparts when instrumenting veteran status with birth cohort. The similar pattern is observed by \textcite{bauer2012evaluating}, who measured higher work performance among German citizens born on or after the threshold date and being drafted into CMS, compared with those who did not serve, by exploiting partially fuzzy regression discontinuity. However, the wage premium disappears once the selection effect is taken into account.
+
+
+\textcite{hisnanick2003great} proposed the wage equation to evaluate the economic progress and human capital development of African-American males, which indicated that military service mitigates their disadvantaged status and is reflected in higher post-service wages. In contrast, \textcite{lau2004dynamic} constructed a dynamic general equilibrium model to validate the inefficiency of the draft, which postpones human capital accumulation and reduces labor productivity.
+
+\textcite{mouganie2020conscription} employed the reform that permanently exempted French men born after 1979 from CMS in a regression discontinuity design. The study finds that conscription eligibility significantly increases years of schooling but has no effect on labor market outcomes, largely due to the loss of work experience in the early career stage. 
+
+\textcite{hubers2015long} exploited a similar reform in the Netherlands to show that CMS decreases the university graduates by 1.5 percentage points and lowers citizens' wage earnings after 18 years of military service by nearly 3\%. Likewise, the effect of conscription on education fails to fully explain the wage reduction.
+
+Regarding the related research in Taiwan, \textcite{bhgt} used calendar year as the running variable and applied a regression discontinuity and difference-in-differences (RD-DiD) design to estimate the causal effect of a two-month deduction in CMS in Taiwan (from 22 months to 20 months). The results suggested that shorter service did not affect the duration of job search or future income, despite the increase in work experience.
+
+A primary concern with this work is whether year can appropriately serve as a running variable. Moreover, the reform in 2004 cannot provide sufficient variation to capture the outcome effects, compared with the reforms in 2000, 2013, and 2024.
+
+
+To our knowledge, no prior study has examined the impact of the 2013 CMS reform on individuals’ life-cycle patterns in Taiwan. Our main contribution is to use the explicit policy rule as the variation to provide credible estimates. In addition, this paper serves as the bridge between the reduced-form and general equilibrium structural model approaches, using the single agent model to enable quantitative analysis with micro-foundations. 
+
+\section{Data}
+
+\subsection{Low Granularity Data Source} 
+
+Our data come from the \textit{Survey on the Employment Situation of Young Labor (15-29)}, available from the Survey Research Data Archive (SRDA) in Taiwan. This repeated cross-sectional data covers the survey years
+2012, 2014, 2018, 2019, 2020, and 2022.
+
+The self-administered questionnaire records the dependent variables of interest, including current wage, the length of time taken to find the first job, and the age when the first job was obtained. It also contains information on the respondent’s birth year, gender, educational attainment, and first-job wage. However, without the record of military service experience, we can only assume that each male was required to complete CMS.
+
+Table \eqref{sample-table} reports sample observations by survey year and birth year. For simplicity, cohorts are classified according to the length of required military service. The sample size is unbalanced and insufficient near the cutoff for a fixed survey year. Therefore, this survey data might not be ideal for RD design, while the administrative data might be a better alternative.
+
+\begin{table}
+\centering
+\begin{tabular}{crr}
+\toprule
+\diagbox{Year}{CMS}  & 1 year & 4 months\\
+\midrule
+2012 & 1636 & 27\\
+2014 & 1567 & 102\\
+2018 & 1253 & 551\\
+2019 & 1085 & 866\\
+2020 & 835 & 1079\\
+2022 & 280 & 1584\\
+\midrule
+Total & 6656 & 4209\\
+\bottomrule
+\end{tabular}
+\caption{Sample Observations by Year and Cohort}
+\label{sample-table}
+\end{table}
+
+\subsection{Identification Issue}
+
+The limitations of the survey data pose a threat to identification. First, the data only reveals the respondent's birth year instead of the birth month. This leads to a discrete running variable, which might violate the assumption of continuous conditional expectation function (CEF) because of finite mass points. Moreover, the number of data points is insufficient for a given arbitrary bandwidth, and this drawback may lead to a biased estimator if a larger bandwidth is chosen to capture more data points. These issues indicate that the overall survey data quality is not great enough to run an RD design.
+
+Appendix \ref{rdd_survey_dt} discusses several reduced-form equations under the RD framework using the survey data. However, in practice, these equations are problematic and do not allow for identification.
+
+\section{Empirical Strategy}
+
+
+\subsection{Event Study with Survey Data}
+
+To address the collinearity discussed above, we implemented an event study approach using the survey data:
+
+\begin{equation}
+\begin{split}
+wage_{it} = \sum_{g \neq -1} \delta_g \cdot \mathbb{1}\{{R}_{i} = g\} + \eta \cdot \text{bachelor}_{it} + \lambda_{a} + \gamma_{t} + \nu_{it},
+\end{split}
+\end{equation}
+
+where $g=-1$ is the baseline cohort who was born in 1993. Controlling for age ($\lambda_a$) and survey year ($\gamma_t$), we aim to investigate whether the observed wage is higher or lower for the younger cohorts, compared to the baseline group.
+
+Note that this equation serves only as a placebo test. Figure \eqref{event_study_plot} showed an upward trend nearly the cutoff, as expected; however, the current data are unsuitable for further robustness checks. Table \eqref{event_study_reg_res} reports the detailed result. 
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio]{event_study_new.png}
+    \caption{Event Study Plot}
+    \label{event_study_plot}
+\end{figure}
+
+
+
+
+
+
+
+\subsection{RD with Panel Data}
+Suppose we have the administrative panel data instead. Consider the following RD specification:
+
+\begin{equation}
+y_i = \beta_0 + \beta_1\mathbb{1}\{R_i\geq 1994\}+\beta_2(R_i-1994) + \eta\cdot\text{bachelor}_i + \varepsilon_i.
+\label{rd_canonical}
+\end{equation}
+
+Let $y_i$ denote the outcome variable, which includes the current wage, the duration of job search before the first job, and the age at first marriage. The running variable 
+$R_i$ represents the individual's birth month, with January 1994 as the cutoff, bachelor is a dummy variable indicating whether the individual has obtained a college degree, and $\varepsilon_i$ is the error term.
+
+Note that this equation only requires cross-sectional data, and the wage variable is measured by wage at the specific time $t$ instead of age $a$. Since  administrative data provides us detailed running variable, the observed wage around the cutoff is exactly the wage at the specific age, which helps us identify $\beta_1$. Furthermore, the availability of panel data permits the estimation of equation \eqref{rd_canonical} for each period, which allows for tracing the wage profiles from age 25 to 40 across two similar cohorts (e.g., those born in December 1993 and January 1994).
+
+
+
+
+
+\section{Model}
+
+Consider a representative Taiwanese male agent who faces an intertemporal finite horizon problem from age $t = 18$ to $T=36$. The individual $i$ aims to maximize his lifetime utility by choosing private consumption $c$, labor supply $n$, tertiary education decision $d$ and military service status $m$. The flow payoff utility for each period $t$ is:
+
+\begin{equation}
+    u(c_t,l_t)=\frac{1}{1-\gamma}(c^\eta_t l^{1-\eta}_t)^{1-\gamma}
+\end{equation}
+
+The key element of this model is the timing of fulfilling the CMS duty. The military status evolves as follows:
+
+\begin{equation}
+m_{t+1} =
+\begin{cases}
+\{0,1\}, \quad &m_t = 0,\\
+\{1\}, \quad &m_{35} = 0,\\
+\{2\}, \quad &m_{t} = 1,
+\end{cases}
+\end{equation}
+
+where $m_t = 0$ indicates an agent decides not to complete CMS in period $t$, $m_t=1$ indicates he chooses to complete CMS in period $t$, and $m_t=2$ indicates an agent has already completed CMS. Note that $t = 36$ is the final period the citizen must complete CMS.
+
+
+The individual faces multiple budget constraints depending on his discrete choice combination $d_t\times m_t$:
+
+\begin{equation}
+\begin{aligned}
+(&1-d_t)\cdot\Big[\mathbb{1}\{m_t=1\}\bar s + \mathbb{1}\{m_t\neq1\}n_t + l_t\Big]\quad +&& d_t\cdot 1 \leq 1,\\
+&c_t + b_t = w_tn_t + (1-r_{t-1})b_{t-1}, &&d_t=0,\, m_t=\{0,2\},\\
+&c_t = \underline{w} && d_t=0,\, m_t = 1,\\
+&c_t + C_1\mathbb{1}_{12 \leq e_t\leq16} +  C_2\mathbb{1}_{e_t\geq16} = a_t,&& d_t=1, \,m_t = \{0,2\}.
+\end{aligned}
+\label{bc}
+\end{equation}
+
+
+When an agent chooses neither to pursue higher education nor to fulfill the CMS duty, he faces a trade-off between labor and leisure. Wage earnings can be allocated between consumption and savings. If an agent decides to pursue higher education ($d_t=1$), he must devote an entire year to study, leaving no time for work or leisure. This also implies he cannot participate in military service. The agent's family provides financial support $a_t$ to finance private consumption and college tuition.
+We denote the costs of attending college and graduate school / Ph.D. as $C_1$ and $C_2$ respectively. When an agent decides to complete CMS ($m_t = 1$), he receives a basic military income, $\underline{w}$. Savings or borrowings are not permitted in this period. Additionally, the length of CMS, $\bar s$, is fixed, and the leisure time is determined by $l_t = 1-\bar s$, which rules out the possibility of entering the labor market or schooling.
+
+The human capital accumulation in our model is defined as:
+
+
+\begin{equation}
+w_t = f(x_t, e_t) - \delta\mathbb{1}\{m_t=1\}\bar s + \xi_t,
+\label{wage_eq}
+\end{equation}
+
+where $x$ is full-time or part-time work experience and $e$ is years of schooling. These two state variables are characterized by the following law of motions:
+
+\begin{align}
+& x_{t+1} = x_t + n_t\quad \forall t, \\
+& e_{t+1} =  e_t +  d_t, \quad e_t\leq\Bar{e},\,\forall t. 
+\label{law_of_motion}
+\end{align}
+
+
+The wage equation \eqref{wage_eq} can be decomposed into three components: The term $f(\cdot)$ is the CRTS production function, the state vector $\{x,e\}$ denotes the capital inputs. If the agent serves as a soldier in period $t$, his productivity depreciates at the constant rate $\delta$. The final part is the war shock following the AR(1) process:
+
+\begin{equation}
+\begin{split}
+    \xi_{t+1} = \rho\xi_t + \nu_t\\
+    \nu_t \sim  \mathcal{N}(0,\sigma)
+\end{split}
+\end{equation}
+
+
+Let $\beta$ be the subjective discount factor, the individual maximization problem can be written as:
+
+\begin{equation}
+\small
+\begin{split}
+V_t(x_t, e_t) = &\max_{\{c_t, n_t,d_t,m_t\}} (1-d_t)\cdot u(c_t, 1-\mathbb{1}\{m_t=1\}\bar s - \mathbb{1}\{m_t\neq1\}n_t) + d_t\cdot u(c_t,0)\\
+&+\beta \int V_{t+1}(x_{t+1},e_{t+1})dF(x_{t+1}, e_{t+1}\mid x_t, e_t,c_t,n_t,d_t,m_t),
+\end{split}
+\end{equation}
+
+subject to the budget constraints \eqref{bc}.
+
+\section{Estimation}
+Because of the complexity of the model, we will adopt a two-step approach to identify the deep parameters. First, we estimate the wage equation outside the model.
+Second, we solve the Bellman equation numerically using value function iteration. However, due to our limited experience in addressing these technical issues in the estimation process, we believe that collaboration under the guidance of Professor would be highly valuable.
+
+
+\section{Policy Experiment}
+\begin{enumerate}
+\item Change the length of CMS, $\bar s \in [0,1]$, and study the wage profile $w_t$ and decision process $\{c_t, n_t, d_t,m_t\}, \; t=18,...,36.$ We can also calculate the lifetime utility as an approximation of the younger cohort's welfare.
+
+\item We can further assume that an individual faces one of two types of governments: one with a higher probability of war against China and one with a lower probability. Therefore, individual forms beliefs in the current government, which is updated according to the Bayes's rule. We expect that these beliefs will affect the choices of younger cohorts, especially $d_t$ and $m_t$, during the early stages of life.
+
+\end{enumerate}
+
+
+\printbibliography[category=dataset,title={Datasets}]
+\nocite{CLA2015, MOL2017, MOL2019, MOL2021a,MOL2021b,MOL2024}
+\clearpage
+
+
+\printbibliography[notcategory={dataset}] \clearpage
+
+
+\appendix
+\section*{Appendix} 
+\section{RDD with Survey Data}\label{rdd_survey_dt}
+
+We first focus on the wage differential between two similar cohorts using the survey data. The reduced-form equation is written as:
+
+ \begin{equation}
+    y_{i,a} = \beta_0+\beta_1\mathbb{1}\{R_i\geq 1994\}+\beta_2(R_{i}-1994) + X_{i,a}'\gamma + \xi_{i,a},
+    \label{rd_survey_dt_eq1}
+\end{equation}
+
+where $y_{i,a}$ is the wage earnings of individual $i$ at age $a$, $R_i$ is the birth year with 1994 as the cutoff. $X_{i,a}$ denotes the covariates, including bachelor's degree, survey year fixed effect and age fixed effect. $\beta_1$ is the coefficient of interest.
+
+This specification cannot identify $\beta_1$. Note that birth year is defined as $R_i = \text{Survey Year} - \text{Age}.$ If both the survey year and age fixed effect are included, collinearity arises. When only the former control variable (survey year) is included, age would confound with $y_{i,a}$ and $R_i$. This issue also occurs when only the age fixed effect is considered.
+
+Now we consider another specification:
+
+ \begin{equation}
+    y_i = \beta_0+\beta_1\mathbb{1}\{R_i\geq 1994\}+\beta_2(R_{i}-1994) + X_{i}'\gamma + \xi_i.
+    \label{rd_survey_dt_eq2}
+\end{equation}
+
+The difference between \eqref{rd_survey_dt_eq1}
+and \eqref{rd_survey_dt_eq2} lies in the measurement of the dependent variable. In the former regression, all current wages in the survey data are included, so both cohort (age) effect and survey year fixed effect must be considered. In \eqref{rd_survey_dt_eq2}, we restricted the sample to wages observed at the specific age, say 25, and excluded observations from other ages. Under this setting, only year fixed effect is needed. However, $\beta_1$ remains unidentified due to the survey data structure: conditional on a given survey year, wage at 25 only corresponds to a single birth cohort, resulting in no birth year variation within a year.
+
+\section{Event Study Regression Result}
+
+\begin{table}
+\footnotesize
+\centering
+\vspace{-2em}
+\begin{tabular}{lc}
+   \tabularnewline \midrule\midrule
+   Dependent Variable:           & wage\\  
+   \midrule
+   \emph{Variables}\\
+   relative\_birth\_yr $=$ -11   & -2,652.7$^{***}$\\   
+                                 & (806.3)\\   
+   relative\_birth\_yr $=$ -10   & -2,028.3$^{**}$\\   
+                                 & (717.7)\\   
+   relative\_birth\_yr $=$ -9    & -2,574.3$^{***}$\\   
+                                 & (563.2)\\   
+   relative\_birth\_yr $=$ -8    & -2,451.1$^{***}$\\   
+                                 & (665.2)\\   
+   relative\_birth\_yr $=$ -7    & -1,798.5$^{*}$\\   
+                                 & (840.9)\\   
+   relative\_birth\_yr $=$ -6    & -1,381.9$^{**}$\\   
+                                 & (599.8)\\   
+   relative\_birth\_yr $=$ -5    & -1,174.5\\   
+                                 & (682.4)\\   
+   relative\_birth\_yr $=$ -4    & -1,316.7$^{***}$\\   
+                                 & (347.3)\\   
+   relative\_birth\_yr $=$ -3    & -519.6\\   
+                                 & (390.3)\\   
+   relative\_birth\_yr $=$ -2    & -192.3\\   
+                                 & (275.4)\\   
+   relative\_birth\_yr $=$ 0     & 353.7\\   
+                                 & (337.9)\\   
+   relative\_birth\_yr $=$ 1     & 1,317.4$^{***}$\\   
+                                 & (409.6)\\   
+   relative\_birth\_yr $=$ 2     & 788.8\\   
+                                 & (457.8)\\   
+   relative\_birth\_yr $=$ 3     & 1,500.4$^{***}$\\   
+                                 & (382.6)\\   
+   relative\_birth\_yr $=$ 4     & 2,040.7$^{*}$\\   
+                                 & (955.9)\\   
+   relative\_birth\_yr $=$ 5     & 935.6$^{**}$\\   
+                                 & (367.0)\\   
+   relative\_birth\_yr $=$ 6     & 2,174.3$^{***}$\\   
+                                 & (317.4)\\   
+   relative\_birth\_yr $=$ 7     & 3,420.4$^{***}$\\   
+                                 & (856.2)\\   
+   relative\_birth\_yr $=$ 8     & 3,544.1$^{***}$\\   
+                                 & (855.0)\\   
+   relative\_birth\_yr $=$ 9     & 6,614.8$^{***}$\\   
+                                 & (187.8)\\   
+   bachelor                      & 3,869.8$^{***}$\\   
+                                 & (769.2)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   age                           & Yes\\  
+   yr                            & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations                  & 10,865\\  
+   R$^2$                         & 0.17168\\  
+   Within R$^2$                  & 0.02493\\  
+  \midrule\midrule
+   \multicolumn{2}{l}{\emph{Clustered (age) standard-errors in parentheses}}\\
+   \multicolumn{2}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}
+\caption{Event Study Regression Table}
+\label{event_study_reg_res}
+\end{table}
+
+
+\end{document}

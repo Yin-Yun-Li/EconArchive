@@ -169,7 +169,7 @@ v(X_{t}, a_t) &\equiv u(X_t, a_t) + \delta\int \Bar{V}(X_{t+1}) df(X_{t+1} \mid 
 Last, we can derive the conditional choice probability (CCP) of choosing action $a_t$ given state $X_t$:
 \begin{equation}
 \begin{split}
-\Pr(a_t=j\mid s_t, x_t) &= \Pr(v_j+\xi(j)>v_k+\xi(k), k\neq j\mid s_t, x_t)\\
+\Pr(a_t=j\mid s_t, x_t) &= \Pr(v_j+\varepsilon(j)>v_k+\varepsilon(k), k\neq j\mid s_t, x_t)\\
 &= \frac{\exp(v_j)}{\exp(v_1)+\exp(v_0)}, \quad j,k\in\{0,1\}, 
 \label{ccp}
 \end{split}
@@ -294,6 +294,8 @@ However, the policy's effectiveness should be discussed with caution, as this ba
     \label{fig:wage_profile_comparison}
 \end{figure}
 
+\section*{Supplementary Material}
+The replication code is available on \href{https://github.com/Yin-Yun-Li/labor-econ/blob/main/Code/DDC.jl}{GitHub}.
 
 \clearpage
 \appendix

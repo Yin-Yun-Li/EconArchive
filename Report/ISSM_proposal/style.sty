@@ -1,0 +1,244 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{style}
+
+% Geometry settings for A4 paper with 3cm margins
+\usepackage[a4paper,margin=3cm]{geometry}
+
+\usepackage{amsmath}
+
+% Using unicode characters in math mode
+% \usepackage{unicode-math}
+% \setmathfont{Asana Math}
+
+\usepackage{palatino}
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+% For using Chinese characters
+% \usepackage{xeCJK}
+% \XeTeXlinebreaklocale "zh"
+
+% Set monospaced font in the document
+%\setmonofont{Ubuntu Mono}
+
+% Set Chinese font
+%\setCJKmainfont{cwTeXMing}
+
+% Set line spacing
+\linespread{1.1}
+
+\usepackage{diagbox} 
+\usepackage{longtable}
+\usepackage{adjustbox}
+
+% Set spacing between paragraphs
+\setlength{\parskip}{0ex plus0.5ex minus0.2ex}
+
+% Import xcolor to flexibly use colors in LaTeX
+\usepackage{xcolor}
+\definecolor{greenblue}{RGB}{35, 100, 170}
+\definecolor{jordyblue}{RGB}{145, 196, 242}
+\definecolor{pictonblue}{RGB}{61, 165, 217}
+\definecolor{mountbattenpink}{RGB}{166, 128, 140}
+\definecolor{darkred}{RGB}{170, 38, 35}
+\definecolor{asparagus}{RGB}{107, 170, 117}
+\definecolor{gray75}{gray}{0.75}
+
+% Styles for links
+\usepackage[linktocpage=true]{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=asparagus,
+    filecolor=greenblue,
+    linkcolor=greenblue,
+    urlcolor=greenblue
+}
+
+% For good-looking tables
+\usepackage{booktabs}
+
+% Styles for headings
+\usepackage{titlesec}
+\usepackage{threeparttable}
+% Styles for captions
+\usepackage{caption}
+\usepackage[font=normalsize]{subcaption}
+\captionsetup{format=plain, font=footnotesize, labelfont={sc,color=greenblue}, width=1\textwidth}
+
+% Citation
+% \usepackage[natbibapa]{apacite}
+
+
+%%%%%%%%%%%%%%%%%%%
+%% Font Settings %%
+%%%%%%%%%%%%%%%%%%%
+
+% Using unicode characters in math mode
+%\usepackage{unicode-math}
+
+% For using Chinese characters
+%\usepackage{xeCJK}
+%\XeTeXlinebreaklocale "zh"
+
+% Set monospaced font in the document
+%\setmonofont{Ubuntu Mono}
+
+% Set Chinese font
+%\setCJKmainfont{Noto Serif CJK KR}
+%\setCJKsansfont{Noto Sans CJK KR}
+%\usepackage{CJKutf8}
+
+% For theorem environment setting
+\usepackage{amsthm}
+\renewcommand\qedsymbol{\rule{2mm}{2mm}}
+% Theorems, definitions, exercises, and other environments defined
+\newtheoremstyle{scstyle}{.5em}{.5em}{\itshape}{}{\bfseries\scshape}{.}{\newline}{\thmname{#1} \thmnumber{#2} \normalfont\textbf{\thmnote{(#3)}}}
+\theoremstyle{scstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{assumption}{Assumption}[section]
+\newtheorem{exercise}{Exercise}[section]
+\usepackage{multirow}
+\newtheorem*{remark}{Remark}
+\newtheorem*{question}{Question}
+\newtheorem{example}{Example}[section]
+\newtheorem{proposition}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{answer}{Answer}
+\newtheorem*{summary}{Summary}
+\newtheorem{ans}{Answer}
+\newtheorem{exer}{Exercise}
+\setcounter{tocdepth}{2}
+\theoremstyle{remark}
+\newtheorem*{solution}{Solution}
+
+\newenvironment{rmk}[1][remark]{%
+  \begin{remark}[{#1}]$ $\par\nobreak\ignorespaces
+}{%
+  \end{remark}
+}
+
+\newenvironment{pf}[1][\proofname]{%
+  \begin{proof}[#1]$ $\par\nobreak\ignorespaces
+}{%
+  \end{proof}
+}
+
+
+
+% Frequently used mathematical operators
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Ima}{\operatorname{Im}}
+\newcommand{\spn}{\operatorname{span}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\nullity}{\operatorname{nullity}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\ind}{\perp\!\!\!\perp}
+\newcommand{\iid}{\overset{\text{iid}}{\sim}}
+\newcommand{\cp}{\xrightarrow{p}}
+\newcommand{\cas}{\xrightarrow{a.s.}}
+\newcommand{\cd}{\xrightarrow{d}}
+\newcommand{\clp}{\xrightarrow{L^p}}
+\newcommand{\plim}{\operatorname*{plim}}
+\newcommand{\argmax}{\operatorname*{argmax}}
+\newcommand{\argmin}{\operatorname*{argmin}}
+
+% Brackets
+\newcommand{\bc}[1]{\left\lbrace #1 \right\rbrace} 
+\newcommand{\bp}[1]{\left( #1 \right)} 
+\newcommand{\bs}[1]{\left[ #1 \right]} 
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\of}[1]{{\left( #1 \right)}}
+\newcommand{\innerproduct}[2]{\left\langle #1, #2 \right\rangle}
+
+% Allowing display-style math breaks
+\allowdisplaybreaks
+
+% Code listing
+\usepackage{minted}
+\setminted{
+fontsize=\footnotesize, 
+escapeinside=||,
+mathescape=true,
+numbersep=5pt,
+linenos=true,
+autogobble,
+framesep=3mm}
+
+% Plotting in LaTeX
+\usepackage{tikz}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning,matrix}
+
+% Using color box in LaTeX
+\usepackage[many]{tcolorbox}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+%\pagestyle{fancy}
+\fancyhf{}
+
+% Automatically place title at the left header and date at the right header
+\tcbset{
+    sharp corners,
+    colback = white,
+    before skip = 1em,    % add extra space before the box
+    after skip = 1em      % add extra space after the box
+}
+
+\newtcolorbox{mybox}{
+  enhanced,
+  breakable,
+  boxrule=0pt,frame hidden,
+  colback=greenblue!10!white,
+  %before skip=\baselineskip,
+  %after skip=\baselineskip,
+  sharp corners
+}
+
+\newtcolorbox{bbox}{
+  enhanced,
+  breakable,
+  boxrule=0pt,frame hidden,
+  borderline west={3pt}{0pt}{greenblue},
+  colback=greenblue!10!white,
+  %before skip=\baselineskip,
+  %after skip=\baselineskip,
+  sharp corners
+}
+
+\newtcolorbox{gbox}{
+  enhanced,
+  breakable,
+  boxrule=0pt,frame hidden,
+  borderline west={3pt}{0pt}{asparagus},
+  colback=asparagus!10!white,
+  sharp corners
+}
+
+\newtcolorbox{pbox}{
+  enhanced,
+  breakable,
+  boxrule=0pt,frame hidden,
+  borderline west={3pt}{0pt}{mountbattenpink},
+  colback=mountbattenpink!10!white,
+  sharp corners
+}
+
+\newtcolorbox{dbox}{
+  enhanced,
+  breakable,
+  boxrule=0pt,frame hidden,
+  borderline west={3pt}{0pt}{darkgray},
+  colback=darkgray!10!white,
+  sharp corners
+}
+
+\newenvironment{defbox}{\begin{bbox}\begin{definition}}{\end{definition}\end{bbox}}
+\newenvironment{thmbox}{\begin{gbox}\begin{theorem}}{\end{theorem}\end{gbox}}
+\newenvironment{quebox}{\begin{pbox}\begin{question}}{\end{question}\end{pbox}}
+\newenvironment{asnbox}{\begin{pbox}\begin{assumption}}{\end{assumption}\end{pbox}}
