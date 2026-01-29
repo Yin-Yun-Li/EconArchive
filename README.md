@@ -1,2 +1,2 @@
-# Labor Econ
-Materials in Labor Economics field.
+# Economics Archive
+Materials in Economics.
